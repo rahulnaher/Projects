@@ -1,0 +1,22 @@
+import requests
+from bs4 import BeautifulSoup
+
+# specify the url of the website you want to scrape
+url = "https://www.example.com/articles"
+
+# send a request to the website and retrieve the HTML source code
+response = requests.get(url)
+html = response.text
+
+# parse the HTML source code using BeautifulSoup
+soup = BeautifulSoup(html, 'html.parser')
+
+# use the 'find_all' method to find all the elements that contain the text you want to scrape
+articles = soup.find_all('div', class_='article')
+
+# loop through the elements and extract the text
+for article in articles:
+    title = article.find('h2').text
+    content = article.find('p').text
+    print(title)
+    print(content)
